@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD MAPPER 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jhr.corp.gnu.procedure">
+
+    <select id="loginProcedure" statementType="CALLABLE" parameterType="LoginVo">
+        {
+            CALL NGIS.SP_COM_PASSWORD_CHECK (
+                #{classof},
+                #{code},
+                #{password},
+                #{host},
+                #{group},
+                #{O_LOGIN_PASS_YN, mode=OUT, jdbcType=VARCHAR},
+                #{O_RSLT_CODE, mode=OUT, jdbcType=VARCHAR},
+                #{O_WRONG_CNT, mode=OUT, jdbcType=DECIMAL},
+                #{O_MSG, mode=OUT, jdbcType=VARCHAR}
+            )
+        }
+    </select>
+
+    <select id="infoProcedure" statementType="CALLABLE" parameterType="UserVo">
+        {
+            CALL NGIS.SP_SUGGEST_USER_INFO (
+                #{classof},
+                #{O_NAME, mode=OUT, jdbcType=VARCHAR},
+                #{O_DEPT, mode=OUT, jdbcType=VARCHAR},
+                #{O_EMAIL, mode=OUT, jdbcType=VARCHAR},
+                #{O_MOBILE, mode=OUT, jdbcType=VARCHAR},
+                #{O_MEMBER, mode=OUT, jdbcType=VARCHAR},
+                #{O_RSLT, mode=OUT, jdbcType=VARCHAR}
+            )
+        }
+    </select>
+
+</mapper>
